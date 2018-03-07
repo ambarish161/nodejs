@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+<meta charset="utf-8"/>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<button id="ajax">start oauth</button>
+
+<script type="text/javascript">
+  
+    $('#ajax').click(function(){ 
+	console.log('started');
+        //alert('ajax');
+         $.ajax({ 
+             type: "GET",
+             //dataType: "json",
+             url: "http://localhost:3113/",
+             success: function(data){
+				console.log('success');
+				console.log(data);			 
+                var w = window.open();
+				//Append Search unordered list
+				var newwindow;
+				newwindow=window.open(data,'newwindow','width=1060,height=1040,toolbar=0,menubar=0,location=0');  
+				console.log("new window opened");
+				var timer = setInterval(function() { 
+					if(!newwindow.closed){
+						console.log("printing url...") ; 
+						console.log('url: '+ newwindow.location);
+					}
+					if(newwindow.closed) {
+						clearInterval(timer);
+						console.log('new window closed');
+					}
+				}, 1000);
+             }
+         });
+    });
+
+</script>
+
+
+<div id="div1"></div>
+
+</body>
+</html>
